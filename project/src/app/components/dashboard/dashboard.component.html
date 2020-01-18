@@ -23,15 +23,23 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </td>
-          <td *ngIf="current_action !=null">
-            <button (click)="editAction(current_action)">Edit</button>
-          </td>
-          <td *ngIf="current_action !=null">
-            <button (click)="deleteActionAction(current_action)">Delete</button>
-          </td>
+          </td>&nbsp;
           <td>
-            <button (click)="addAction()">Add New</button>
+            <button mat-raised-button color="primary" (click)="addAction()"><i class="material-icons">
+                add
+              </i>Add New</button>
+          </td>&nbsp;
+          <td *ngIf="current_action !=null">
+
+            <button mat-raised-button color="primary" (click)="editAction(current_action)"><i class="material-icons">
+                edit
+              </i>Edit</button>
+          </td>&nbsp;
+          <td *ngIf="current_action !=null">
+            <button mat-raised-button color="warn" (click)="deleteActionAction(current_action)"><i
+                class="material-icons">
+                delete
+              </i>Delete</button>
           </td>
         </tr>
         <tr *ngIf="current_action != null">
@@ -65,7 +73,7 @@
               </mat-select>
             </mat-form-field>
           </td>
-          
+
         </tr>
 
         <tr *ngIf="current_language != null">
@@ -75,9 +83,9 @@
 
         </tr>
         <tr *ngIf="current_language != null">
-            <td>
-                {{current_language.instructions}}
-            </td>
+          <td>
+            {{current_language.instructions}}
+          </td>
         </tr>
       </div>
     </div>
