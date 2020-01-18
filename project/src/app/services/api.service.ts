@@ -71,11 +71,12 @@ export class APIService {
           );
     }
 
-    public makeTemplate(sub_action_id, language, template,  success, failure): void 
+    public makeTemplate(sub_action_id, language, template, instructions, success, failure): void 
     {
         var data = {
             "langage" : language,
-            "template": template
+            "template": template,
+            "instructions": instructions,
         };
         
         this.httpClient
@@ -116,11 +117,12 @@ export class APIService {
         );
     }
     
-    public editTemplate(_id: string, language, template, success: (resp: any) => void, failure: (err: any) => void) {
+    public editTemplate(_id: string, language, template, instructions, success: (resp: any) => void, failure: (err: any) => void) {
         
         var data = {
             "language" : language,
-            "template": template
+            "template": template,
+            "instructions": instructions
         };
 
         this.httpClient
