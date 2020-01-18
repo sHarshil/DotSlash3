@@ -42,8 +42,11 @@ export class CodingComponent implements OnInit
     {
         this.current_sub_action = null;
         this.sub_actions = null;
+        
         this.languages = null;
         this.current_language = null;
+        
+        this.code = null;
 
         if (event.isUserInput)
         {
@@ -56,6 +59,9 @@ export class CodingComponent implements OnInit
     {
         this.languages = null;
         this.current_language = null;
+
+        this.code = null;
+        
         if (event.isUserInput)
         {
             console.log(event);
@@ -146,7 +152,7 @@ export class CodingComponent implements OnInit
         language: "javascript"
     };
   
-    code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+    code: string = null;
 
     options = 
     {
