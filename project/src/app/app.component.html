@@ -20,8 +20,11 @@
     <button *ngIf="!applicationStateService.isMobileResolution" mat-button color="white" routerLink="/">
       <i class="material-icons matIcon">home</i>Home
     </button>
+    <button *ngIf="!applicationStateService.isMobileResolution" mat-button color="white" routerLink="/dashboard">
+      <i class="material-icons matIcon">dashboard</i>Dashboard
+    </button>
     <button
-      
+
       mat-button
       color="white"
       routerLink="/code"
@@ -29,7 +32,7 @@
       <i class="material-icons matIcon">code</i>Code!
     </button>
     <!-- <button
-      
+
       mat-button
       color="white"
       routerLink="/auth/login"
@@ -136,12 +139,12 @@
          <a mat-list-item><i class="material-icons matIcon">call</i>Contact Us</a>-->
       </mat-nav-list>
     </mat-sidenav>
-    
+
     <mat-sidenav-content>
       <div class="main">
         <router-outlet #o="outlet"></router-outlet>
       </div>
     </mat-sidenav-content>
-  </mat-sidenav-container> 
+  </mat-sidenav-container>
 </div>
 <!--app-footer></app-footer-->
