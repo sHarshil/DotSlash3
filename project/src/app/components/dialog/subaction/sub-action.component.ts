@@ -21,7 +21,7 @@ export class SubActionModalDialog implements OnInit {
     }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   addSubAction(): void{
@@ -34,7 +34,7 @@ export class SubActionModalDialog implements OnInit {
     (err) => {
         console.log(err);
         alert("Error");
-        this.dialogRef.close(false);
+        this.dialogRef.close({"error":true});
     });
   }
 
@@ -48,6 +48,8 @@ export class SubActionModalDialog implements OnInit {
     (err) => {
         console.log(err);
         alert("Error");
+        this.dialogRef.close({"error":true});
+
     });
   }
 

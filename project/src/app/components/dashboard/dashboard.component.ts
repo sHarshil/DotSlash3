@@ -164,15 +164,17 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Back :)");
-      if(result)
+      if(!result)
+      {
+        //this.showSnackBar("Sorry, some error occured!");
+      }
+      else if(result)
       {
         this.showSnackBar("Successfully added Action!");
         this.retreiveActions();
        // this.setAction(null, result);
       }
-      else
-      {
+      else if(result["error"]){
         this.showSnackBar("Sorry, some error occured!");
       }
     });
@@ -190,16 +192,19 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result)
+      if(!result)
+      {
+        //this.showSnackBar("Sorry, some error occured!");
+      }
+      else if(result)
       {
         this.showSnackBar("Successfully edited Action!");
         this.retreiveActions();
+       // this.setAction(null, result);
       }
-      else
-      {
+      else if(result["error"]){
         this.showSnackBar("Sorry, some error occured!");
       }
-      console.log("Back :)");
     });
 
   }
@@ -230,13 +235,15 @@ addSubAction() {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("Back :)");
-      if(result)
+      if(!result) {
+        return;
+      }
+      else if(result)
       {
         this.showSnackBar("Successfully added Sub-Action!");
         this.retreiveActions();
-       // this.setAction(null, result);
       }
-      else
+      else if(result["error"])
       {
         this.showSnackBar("Sorry, some error occured!");
       }
@@ -255,17 +262,15 @@ addSubAction() {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result)
+      if(!result) {
+        return;
+      }
+      else if(result)
       {
         this.showSnackBar("Successfully edited Sub-Action!");
-        this.current_sub_action = result;
-        console.log(result);
-
-        this.updateLanguages();
-
-        //this.retreiveActions();
+        this.retreiveActions();
       }
-      else
+      else if(result["error"])
       {
         this.showSnackBar("Sorry, some error occured!");
       }
@@ -304,13 +309,16 @@ addTemplate() {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log("Back :)");
-    if(result)
+    if(!result["cancel"]){
+
+    }
+    else if(result)
     {
       this.showSnackBar("Successfully added Template!");
       this.retreiveActions();
      // this.setAction(null, result);
     }
-    else
+    else if(result["error"])
     {
       this.showSnackBar("Sorry, some error occured!");
     }
@@ -333,7 +341,8 @@ editTemplate(act) {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    if(result)
+    if(result["cancel"] == true) return;
+    else if(result)
     {
       this.showSnackBar("Successfully edited Template!");
       this.current_sub_action = result;
