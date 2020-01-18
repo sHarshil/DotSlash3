@@ -79,7 +79,7 @@
         <div style="margin-bottom: 20px; width: 100%; height: auto;">
           <span style="align-self: center;">Code:</span>
           <button style="align-self: center; float: right; " mat-stroked-button color="primary"
-            (click)="copy()">Copy</button>
+            (click)="copy(current_language.template)">Copy</button>
         </div>
         <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current_language.template"></ngx-monaco-editor>
       </div>

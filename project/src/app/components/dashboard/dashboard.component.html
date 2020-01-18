@@ -6,8 +6,6 @@
   </div>
 
 
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
-    <div fxFlex="75">
       <div [hidden]="false" class="container1">
         <tr>
           <td width="200px">
@@ -100,7 +98,7 @@
               </i>Delete</button>
           </td>
           <td>
-            <button mat-raised-button color="primary" (click)="addTemplate()"><i class="material-icons">
+            <button mat-raised-button color="primary" (click)="addLanguage()"><i class="material-icons">
                 add
               </i>Add New</button>
           </td>
@@ -121,9 +119,7 @@
           </td>
         </tr>
       </div>
-    </div>
 
-    <div fxFlex="25">
       <div *ngIf="current_language != null">
         <div style="margin-bottom: 20px; width: 100%; height: auto;">
           <span style="align-self: center;">Code:</span>
@@ -131,8 +127,6 @@
             (click)="copy()">Copy</button>
         </div>
         <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current_language.template"></ngx-monaco-editor>
-      </div>
-    </div>
   </div>
 
 
