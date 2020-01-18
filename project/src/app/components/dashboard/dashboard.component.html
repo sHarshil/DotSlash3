@@ -6,131 +6,119 @@
   </div>
 
 
-      <div [hidden]="false" class="container1">
-        <tr>
-          <td width="200px">
-            <p> Select Action: </p>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label></mat-label>
-              <mat-select #action_select>
-                <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
-                  [value]="action._id">
-                  {{ action.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
+  <div [hidden]="false" class="container1">
+    <tr>
+      <td width="200px">
+        <p> Select Action: </p>
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select #action_select>
+            <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
+              [value]="action._id">
+              {{ action.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
 
-          <td *ngIf="current_action !=null">
-            <button mat-raised-button color="primary" (click)="editAction(current_action)"><i class="material-icons">
-                edit
-              </i>Edit</button>
-          </td>
-          <td *ngIf="current_action !=null">
-            <button mat-raised-button color="warn" (click)="deleteAction(current_action)"><i class="material-icons">
-                delete
-              </i>Delete</button>
-          </td>
-          <td>
-            <button mat-raised-button color="primary" (click)="addAction()"><i class="material-icons">
-                add
-              </i>Add New</button>
-          </td>
-        </tr>
-        <tr *ngIf="current_action != null">
-          <td>
-            <p>Select Sub-Action:</p>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label></mat-label>
-              <mat-select #sub_action_select>
-                <mat-option (onSelectionChange)="setSubAction($event, sub_action)"
-                  *ngFor="let sub_action of sub_actions" [value]="sub_action._id">
-                  {{ sub_action.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td *ngIf="current_sub_action !=null">
+      <td *ngIf="current_action !=null">
+        <button mat-raised-button color="primary" (click)="editAction(current_action)"><i class="material-icons">
+            edit
+          </i>Edit</button>
+      </td>
+      <td *ngIf="current_action !=null">
+        <button mat-raised-button color="warn" (click)="deleteAction(current_action)"><i class="material-icons">
+            delete
+          </i>Delete</button>
+      </td>
+      <td>
+        <button mat-raised-button color="primary" (click)="addAction()"><i class="material-icons">
+            add
+          </i>Add New</button>
+      </td>
+    </tr>
+    <tr *ngIf="current_action != null">
+      <td>
+        <p>Select Sub-Action:</p>
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select #sub_action_select>
+            <mat-option (onSelectionChange)="setSubAction($event, sub_action)" *ngFor="let sub_action of sub_actions"
+              [value]="sub_action._id">
+              {{ sub_action.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td *ngIf="current_sub_action !=null">
 
-              <button mat-raised-button color="primary" (click)="editSubAction(current_sub_action)"><i class="material-icons">
-                  edit
-                </i>Edit</button>
-            </td>
-            <td *ngIf="current_sub_action !=null">
-              <button mat-raised-button color="warn" (click)="deleteSubAction(current_sub_action)"><i class="material-icons">
-                  delete
-                </i>Delete</button>
-            </td>
-            <td>
-              <button mat-raised-button color="primary" (click)="addSubAction()"><i class="material-icons">
-                  add
-                </i>Add New</button>
-            </td>
-        </tr>
-        <tr *ngIf="current_sub_action != null">
-          <td>
-            <p>Select Language:</p>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label></mat-label>
-              <mat-select #language_select>
-                <mat-option (onSelectionChange)="setLanguage($event, template)" *ngFor="let template of languages"
-                  [value]="template._id">
-                  {{ template.language }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td *ngIf="current_language !=null">
+        <button mat-raised-button color="primary" (click)="editSubAction(current_sub_action)"><i class="material-icons">
+            edit
+          </i>Edit</button>
+      </td>
+      <td *ngIf="current_sub_action !=null">
+        <button mat-raised-button color="warn" (click)="deleteSubAction(current_sub_action)"><i class="material-icons">
+            delete
+          </i>Delete</button>
+      </td>
+      <td>
+        <button mat-raised-button color="primary" (click)="addSubAction()"><i class="material-icons">
+            add
+          </i>Add New</button>
+      </td>
+    </tr>
+    <tr *ngIf="current_sub_action != null">
+      <td>
+        <p>Select Language:</p>
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select #language_select>
+            <mat-option (onSelectionChange)="setLanguage($event, template)" *ngFor="let template of languages"
+              [value]="template._id">
+              {{ template.language }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td *ngIf="current_language !=null">
 
-            <button mat-raised-button color="primary" (click)="editTemplate(current_language)"><i class="material-icons">
-                edit
-              </i>Edit</button>
-          </td>
-          <td *ngIf="current_language !=null">
-            <button mat-raised-button color="warn" (click)="deleteTemplate(current_language)"><i class="material-icons">
-                delete
-              </i>Delete</button>
-          </td>
-          <td>
-            <button mat-raised-button color="primary" (click)="addTemplate()"><i class="material-icons">
-                add
-              </i>Add New</button>
-          </td>
+        <button mat-raised-button color="primary" (click)="editTemplate(current_language)"><i class="material-icons">
+            edit
+          </i>Edit</button>
+      </td>
+      <td *ngIf="current_language !=null">
+        <button mat-raised-button color="warn" (click)="deleteTemplate(current_language)"><i class="material-icons">
+            delete
+          </i>Delete</button>
+      </td>
+      <td>
+        <button mat-raised-button color="primary" (click)="addTemplate()"><i class="material-icons">
+            add
+          </i>Add New</button>
+      </td>
 
-        </tr>
+    </tr>
 
-        <tr *ngIf="current_language != null">
-          <td>
-            <p>Instructions:</p>
-          </td>
-
-
-
-        </tr>
-        <tr *ngIf="current_language != null">
-          <td>
-            {{current_language.instructions}}
-          </td>
-        </tr>
-      </div>
-
-      <div *ngIf="current_language != null">
-        <div style="margin-bottom: 20px; width: 100%; height: auto;">
-          <span style="align-self: center;">Code:</span>
-          <button style="align-self: center; float: right; " mat-stroked-button color="primary"
-            (click)="copy()">Copy</button>
-        </div>
-        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current_language.template"></ngx-monaco-editor>
+    <tr *ngIf="current_language != null">
+      <td>
+        <p>Instructions:</p>
+        <pre>{{current_language.instructions}}</pre>
+      </td>
+    </tr>
   </div>
 
-
-
-
-
+  <div *ngIf="current_language != null">
+    <div style="margin-bottom: 20px; width: 100%; height: auto;">
+      <span style="align-self: center;">Code:</span>
+      <button style="align-self: center; float: right; " mat-stroked-button color="primary"
+        (click)="copy()">Copy</button>
+    </div>
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current_language.template"></ngx-monaco-editor>
+  </div>
 </mat-card>
