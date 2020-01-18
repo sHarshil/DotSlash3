@@ -10,6 +10,8 @@ import { WelcomeComponent } from './components/welcome.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClientModule } from '@angular/common/http';
 import { CodingComponent } from './components/code/coding.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { CodingComponent } from './components/code/coding.component';
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
