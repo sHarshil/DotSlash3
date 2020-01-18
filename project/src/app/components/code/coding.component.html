@@ -8,7 +8,8 @@
   <div [hidden]="false" class="container1">
     <tr>
       <td width="200px">
-        <p>Select Action:
+        <p>
+          <mat-label>Select Action:</mat-label>
       </td>
       <td>
         <mat-form-field>
@@ -57,10 +58,11 @@
 
   </div>
   <div *ngIf="code != null">
-      <div style="margin-bottom: 20px; width: 100%; height: auto;">
-        <span style="align-self: center;">Code:</span>
-          <button style="align-self: center; float: right; " mat-stroked-button color="primary" (click)="copy()">Copy</button>
-      </div>
+    <div style="margin-bottom: 20px; width: 100%; height: auto;">
+      <span style="align-self: center;">Code:</span>
+      <button style="align-self: center; float: right; " mat-stroked-button color="primary"
+        (click)="copy()">Copy</button>
+    </div>
     <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   </div>
 
