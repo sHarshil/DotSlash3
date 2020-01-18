@@ -40,6 +40,8 @@ export class TemplateModalDialog implements OnInit {
       this.data.sub_action_id,
       this.data.language,
       this.data.template,
+
+      this.data.instructions,
     (resp) => {
         this.dialogRef.close(resp);
     },
@@ -55,6 +57,7 @@ export class TemplateModalDialog implements OnInit {
         this.data._id,
         this.data.language,
         this.data.template,
+        this.data.instructions,
       (resp) => {
         this.dialogRef.close(resp);
     },

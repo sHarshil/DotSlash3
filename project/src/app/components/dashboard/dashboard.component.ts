@@ -18,6 +18,7 @@ import { ActionModalDialog } from '../dialog/action/action.component';
 import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA, MatSelect } from '@angular/material';
 import { SubActionModalDialog } from '../dialog/subaction/sub-action.component';
 import { TemplateModalDialog } from '../dialog/template/template.component';
+import { inherits } from 'util';
 
 @Component({
   selector: "dashboard",
@@ -289,7 +290,7 @@ addSubAction() {
 
 addTemplate() {
   const dialogRef = this.dialog.open(TemplateModalDialog, {
-    width: '500px',
+    width: '2000 px',
     data: {
       edit: false,
       _id: null,
