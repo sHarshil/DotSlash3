@@ -58,10 +58,8 @@ app.get("/api/actions", function (req, res) {
 
 
 app.post("/api/actions", function (req, res) {
-  var newAction = req.body;
-  newAction.createDate = new Date();
   var bb = {
-    "name": req.body,
+    "name": req.body.name,
     "createDate": new Date()
   }
   if (!req.body.name) {
