@@ -2,9 +2,14 @@
 <h1 mat-dialog-title *ngIf="data.edit">Edit Template</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <mat-label>Enter Action name</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <mat-label>Action name:</mat-label><span>{{data.action_name}}</span>
+    <mat-label>Sub-Action name:</mat-label><span>{{data.sub_action_name}}</span>
+    <mat-label>Language:</mat-label><input matInput [(ngModel)]="data.language">
   </mat-form-field>
+
+  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="data.template"></ngx-monaco-editor>
+
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

@@ -205,7 +205,7 @@ export class DashboardComponent implements OnInit {
   deleteAction(action)
   {
     this.apiService.deleteAction(
-      action._id, 
+      action._id,
       (resp)=>{
         this.showSnackBar("Successfully Deleted Action!");
         this.retreiveActions();
@@ -275,7 +275,7 @@ addSubAction() {
   deleteSubAction(action)
   {
       this.apiService.deleteSubAction(
-        action._id, 
+        action._id,
         (resp)=>{
           this.showSnackBar("Successfully Deleted Sub-Action!");
           //this.retreiveActions();
@@ -350,7 +350,7 @@ editTemplate(act) {
 deleteTemplate(action)
 {
     this.apiService.deleteTemplate(
-      action._id, 
+      action._id,
       (resp)=>{
         this.showSnackBar("Successfully Deleted Sub-Action!");
         //this.retreiveActions();

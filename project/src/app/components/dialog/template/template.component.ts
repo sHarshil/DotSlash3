@@ -9,6 +9,19 @@ import { templateDialogData } from './templateDialogData';
   styleUrls: ['./template.component.scss']
 })
 export class TemplateModalDialog implements OnInit {
+
+  editorOptions = {
+    theme: "vs-dark",
+    language: "javascript"
+  };
+
+  instructions: string = null;
+  code: string = null;
+
+  options = {
+    theme: "vs-dark"
+  };
+
   constructor(
     public dialogRef: MatDialogRef<TemplateModalDialog>,
     @Inject(MAT_DIALOG_DATA) public data: templateDialogData,
