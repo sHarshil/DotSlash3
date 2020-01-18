@@ -71,9 +71,13 @@ export class APIService {
           );
     }
 
-    public makeTemplate(sub_action_id, success, failure): void 
+    public makeTemplate(sub_action_id, language, template,  success, failure): void 
     {
-        var data = {};
+        var data = {
+            "langage" : language,
+            "template": template
+        };
+        
         this.httpClient
           .post(environment.backend_url + "/templates/" + sub_action_id, data, {
             responseType: "text",
@@ -90,6 +94,52 @@ export class APIService {
               failure(err);
             }
         );
+    }
+
+    public deleteTemplate(_id, success, failure): void 
+    {
+        this.httpClient
+          .delete(environment.backend_url + "/template/"+_id, {
+            responseType: "text",
+            headers: { "Content-Type": "application/json; charset=utf-8" }
+          })
+          .subscribe(
+            res => {
+              const response = JSON.parse(res);
+              console.log(response);
+              success(response);
+            },
+            err => {
+              console.log(err);
+              failure(err);
+            }
+        );
+    }
+    
+    public editTemplate(_id: string, language, template, success: (resp: any) => void, failure: (err: any) => void) {
+        
+        var data = {
+            "language" : language,
+            "template": template
+        };
+
+        this.httpClient
+        .put(environment.backend_url + "/template/" + _id, data , 
+        {
+          responseType: "text",
+          headers: { "Content-Type": "application/json; charset=utf-8" }
+        })
+        .subscribe(
+          res => {
+            const response = JSON.parse(res);
+            console.log(response);
+            success(response);
+          },
+          err => {
+            console.log(err);
+            failure(err);
+          }
+      );
     }
 
     public makeSubAction(action_id, name, success, failure): void 
@@ -114,6 +164,7 @@ export class APIService {
             }
         );
     }
+
     public makeAction(action_name, success, failure): void 
     {
         var data = {

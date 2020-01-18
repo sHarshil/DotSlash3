@@ -1,19 +1,17 @@
-
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SubActionDialogData } from './sub-actionDialogData';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { APIService } from 'src/app/services/api.service';
+import { templateDialogData } from './templateDialogData';
 
 @Component({
-  selector: 'sub-action-app-dialog',
-  templateUrl: './sub-action.component.html',
-  styleUrls: ['./sub-action.component.css']
+  selector: 'app-template',
+  templateUrl: './template.component.html',
+  styleUrls: ['./template.component.scss']
 })
-export class SubActionModalDialog implements OnInit {
-
+export class TemplateModalDialog implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<SubActionModalDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: SubActionDialogData, 
+    public dialogRef: MatDialogRef<TemplateModalDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: templateDialogData, 
     public apiService: APIService,
     ) 
     {
@@ -25,9 +23,10 @@ export class SubActionModalDialog implements OnInit {
   }
 
   addSubAction(): void{
-    this.apiService.makeSubAction(
-      this.data.action_id,
-      this.data.name, 
+    this.apiService.makeTemplate(
+      this.data.sub_action_id,
+      this.data.language,
+      this.data.template, 
     (resp) => {
         this.dialogRef.close(resp);
     },
@@ -39,10 +38,11 @@ export class SubActionModalDialog implements OnInit {
   }
 
   editSubAction(): void {
-    this.apiService.editSubAction(
+    this.apiService.editTemplate(
         this.data._id, 
-        this.data.name, 
-    (resp) => {
+        this.data.language,
+        this.data.template, 
+      (resp) => {
         this.dialogRef.close(resp);
     },
     (err) => {

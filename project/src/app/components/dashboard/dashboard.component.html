@@ -16,7 +16,7 @@
           <td>
             <mat-form-field>
               <mat-label></mat-label>
-              <mat-select>
+              <mat-select #action_select>
                 <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
                   [value]="action.name">
                   {{ action.name }}
@@ -26,7 +26,6 @@
           </td>
 
           <td *ngIf="current_action !=null">
-
             <button mat-raised-button color="primary" (click)="editAction(current_action)"><i class="material-icons">
                 edit
               </i>Edit</button>
@@ -89,7 +88,22 @@
               </mat-select>
             </mat-form-field>
           </td>
+          <td *ngIf="current_language !=null">
 
+            <button mat-raised-button color="primary" (click)="editLanguage(current_language)"><i class="material-icons">
+                edit
+              </i>Edit</button>
+          </td>
+          <td *ngIf="current_language !=null">
+            <button mat-raised-button color="warn" (click)="deleteLanguage(current_language)"><i class="material-icons">
+                delete
+              </i>Delete</button>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" (click)="addLanguage()"><i class="material-icons">
+                add
+              </i>Add New</button>
+          </td>
 
         </tr>
 

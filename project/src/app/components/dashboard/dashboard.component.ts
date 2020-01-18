@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Inject } from "@angular/core";
+import { Component, OnInit, HostListener, Inject, ViewChild } from "@angular/core";
 import { ApplicationStateService } from "src/app/services/application-state.service";
 import {
   animate,
@@ -15,13 +15,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { APIService } from "src/app/services/api.service";
 import { DiffEditorModel } from "ngx-monaco-editor";
 import { ActionModalDialog } from '../dialog/action/action.component';
-import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA, MatSelect } from '@angular/material';
 import { SubActionModalDialog } from '../dialog/subaction/sub-action.component';
-
-export interface Food {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: "dashboard",
@@ -38,6 +33,8 @@ export class DashboardComponent implements OnInit {
   public current_action: {} = null;
   public current_sub_action: {} = null;
   public current_language: {} = null;
+
+  @ViewChild('action_select',{static:false}) action_select: MatSelect;
 
   constructor(
     private httpClient: HttpClient,
@@ -206,16 +203,16 @@ export class DashboardComponent implements OnInit {
   }
   deleteAction(action)
   {
-      this.apiService.deleteAction(
-        action._id, 
-        (resp)=>{
-          this.showSnackBar("Successfully Deleted Action!");
-          this.retreiveActions();
-          this.current_action = null;
-        },
-        (err) => {
-          console.log(err);
-        });
+    this.apiService.deleteAction(
+      action._id, 
+      (resp)=>{
+        this.showSnackBar("Successfully Deleted Action!");
+        this.retreiveActions();
+        this.current_action = null;
+      },
+      (err) => {
+        console.log(err);
+      });
   }
 
 addSubAction() {
@@ -259,7 +256,12 @@ addSubAction() {
       if(result)
       {
         this.showSnackBar("Successfully edited Sub-Action!");
-        this.retreiveActions();
+        this.current_sub_action = result;
+        console.log(result);
+
+        this.updateLanguages();
+
+        //this.retreiveActions();
       }
       else
       {
@@ -275,8 +277,8 @@ addSubAction() {
         action._id, 
         (resp)=>{
           this.showSnackBar("Successfully Deleted Sub-Action!");
-          this.retreiveActions();
-          this.current_action = null;
+          //this.retreiveActions();
+          this.current_sub_action = null;
         },
         (err) => {
           console.log(err);

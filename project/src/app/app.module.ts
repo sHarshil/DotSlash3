@@ -16,6 +16,7 @@ import { MonacoEditorModule } from "ngx-monaco-editor";
 import { DashboardComponent, SnackBarTempComponent } from './components/dashboard/dashboard.component';
 import { ActionModalDialog } from './components/dialog/action/action.component';
 import { SubActionModalDialog } from './components/dialog/subaction/sub-action.component';
+import { TemplateModalDialog } from './components/dialog/template/template.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,13 @@ import { SubActionModalDialog } from './components/dialog/subaction/sub-action.c
     DashboardComponent,
     ActionModalDialog,
     SnackBarTempComponent,
-    SubActionModalDialog
+    SubActionModalDialog,
+    TemplateModalDialog
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
@@ -40,7 +41,7 @@ import { SubActionModalDialog } from './components/dialog/subaction/sub-action.c
     FormsModule,
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
-  entryComponents:[ActionModalDialog, SnackBarTempComponent,SubActionModalDialog],
+  entryComponents:[ActionModalDialog, SnackBarTempComponent,SubActionModalDialog, TemplateModalDialog],
   providers: [],
   bootstrap: [AppComponent]
 })
