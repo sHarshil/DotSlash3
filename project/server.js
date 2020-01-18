@@ -220,7 +220,8 @@ app.post("/api/templates/:subaction_id", function (req, res) {
 // });
 
 app.put("/api/action/:id", function (req, res) {
-  var updateDoc = { $set: req.body }; // { $set: { name: "Hi there" } };
+  var toSet = req.body;
+  var updateDoc = { $set: toSet }; // { $set: { name: "Hi there" } };
 
   delete updateDoc._id;
   //console.log(req.params.id);
@@ -232,15 +233,16 @@ app.put("/api/action/:id", function (req, res) {
       if (err) {
         handleError(res, err.message, "Failed to update action");
       } else {
-        updateDoc._id = req.params.id;
-        res.status(200).json(updateDoc);
+        toSet._id = req.params.id;
+        res.status(200).json(toSet);
       }
     }
   );
 });
 
 app.put("/api/template/:id", function (req, res) {
-  var updateDoc = { $set: req.body }; // { $set: { name: "Hi there" } };
+  var toSet = req.body;
+  var updateDoc = { $set: toSet }; // { $set: { name: "Hi there" } };
 
   delete updateDoc._id;
   //console.log(req.params.id);
@@ -252,8 +254,8 @@ app.put("/api/template/:id", function (req, res) {
       if (err) {
         handleError(res, err.message, "Failed to update Template");
       } else {
-        updateDoc._id = req.params.id;
-        res.status(200).json(updateDoc);
+        toSet._id = req.params.id;
+        res.status(200).json(toSet);
       }
     }
   );
@@ -261,7 +263,8 @@ app.put("/api/template/:id", function (req, res) {
 
 
 app.put("/api/subaction/:id", function (req, res) {
-  var updateDoc = { $set: req.body }; // { $set: { name: "Hi there" } };
+  var toSet = req.body;
+  var updateDoc = { $set: toSet }; // { $set: { name: "Hi there" } };
 
   delete updateDoc._id;
   //console.log(req.params.id);
@@ -273,8 +276,8 @@ app.put("/api/subaction/:id", function (req, res) {
       if (err) {
         handleError(res, err.message, "Failed to update Sub action");
       } else {
-        updateDoc._id = req.params.id;
-        res.status(200).json(updateDoc);
+        toSet._id = req.params.id;
+        res.status(200).json(toSet);
       }
     }
   );
