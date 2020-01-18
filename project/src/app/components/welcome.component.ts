@@ -15,6 +15,10 @@ import { environment } from 'src/environments/environment';
 export class WelcomeComponent implements OnInit {
   constructor(private httpClient: HttpClient, private router: Router, private activatedRoute: ActivatedRoute,public applicationStateService: ApplicationStateService) {   }
 
+  startCode()
+  {
+    this.router.navigate(['/code']);
+  }
   ngOnInit() 
   {
 
