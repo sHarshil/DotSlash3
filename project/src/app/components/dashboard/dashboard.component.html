@@ -57,14 +57,14 @@
               </mat-select>
             </mat-form-field>
           </td>
-          <td *ngIf="current_action !=null">
+          <td *ngIf="current_sub_action !=null">
 
-              <button mat-raised-button color="primary" (click)="editSubAction(current_action)"><i class="material-icons">
+              <button mat-raised-button color="primary" (click)="editSubAction(current_subaction)"><i class="material-icons">
                   edit
                 </i>Edit</button>
             </td>
-            <td *ngIf="current_action !=null">
-              <button mat-raised-button color="warn" (click)="deleteSubAction(current_action)"><i class="material-icons">
+            <td *ngIf="current_sub_action !=null">
+              <button mat-raised-button color="warn" (click)="deleteSubAction(current_subaction)"><i class="material-icons">
                   delete
                 </i>Delete</button>
             </td>
