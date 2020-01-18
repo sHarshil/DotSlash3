@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>Add Action</h1>
+<h1 mat-dialog-title *ngIf="!data.edit">Add Action</h1>
+<h1 mat-dialog-title *ngIf="data.edit">Edit Action</h1>
 <div mat-dialog-content>
     <!-- Current Name: {{data.name}} -->
   <mat-form-field>  
@@ -8,5 +9,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="addAction()">Ok</button>
+  <button mat-button cdkFocusInitial (click)="addAction()" *ngIf="!data.edit">Add</button>
+  <button mat-button cdkFocusInitial (click)="editAction()" *ngIf="data.edit">Edit</button>
 </div>

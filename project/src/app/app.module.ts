@@ -13,7 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { CodingComponent } from "./components/code/coding.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MonacoEditorModule } from "ngx-monaco-editor";
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent, SnackBarTempComponent } from './components/dashboard/dashboard.component';
 import { ActionModalDialog } from './components/dialog/action/action.component';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ActionModalDialog } from './components/dialog/action/action.component';
     WelcomeComponent,
     CodingComponent,
     DashboardComponent,
-    ActionModalDialog
+    ActionModalDialog,
+    SnackBarTempComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { ActionModalDialog } from './components/dialog/action/action.component';
     FormsModule,
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
-  entryComponents:[ActionModalDialog],
+  entryComponents:[ActionModalDialog, SnackBarTempComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

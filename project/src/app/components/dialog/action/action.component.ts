@@ -3,6 +3,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ActionDialogData } from './actionDialogData';
 import { APIService } from 'src/app/services/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 @Component({
   selector: 'action-app-dialog',
@@ -27,6 +29,20 @@ export class ActionModalDialog implements OnInit {
   addAction(): void{
     this.apiService.makeAction(this.data.name, 
     (resp) => {
+        this.dialogRef.close(resp);
+    },
+    (err) => {
+        console.log(err);
+        alert("Error");
+        this.dialogRef.close(false);
+    });
+  }
+
+  editAction(): void {
+    this.apiService.editAction(
+        this.data._id, 
+        this.data.name, 
+    (resp) => {
         this.dialogRef.close(true);
     },
     (err) => {
@@ -34,7 +50,7 @@ export class ActionModalDialog implements OnInit {
         alert("Error");
     });
   }
-  
+
   ngOnInit() {
   }
 

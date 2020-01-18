@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, Inject } from "@angular/core";
 import { ApplicationStateService } from "src/app/services/application-state.service";
 import {
   animate,
@@ -15,7 +15,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { APIService } from "src/app/services/api.service";
 import { DiffEditorModel } from "ngx-monaco-editor";
 import { ActionModalDialog } from '../dialog/action/action.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material';
 
 export interface Food {
   value: string;
@@ -44,7 +44,8 @@ export class DashboardComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public applicationStateService: ApplicationStateService,
     public apiService: APIService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
   ) {}
 
   setAction(event, action: {}) {
@@ -56,11 +57,11 @@ export class DashboardComponent implements OnInit {
 
     this.code = null;
 
-    if (event.isUserInput) {
+    //if (event.isUserInput) {
       console.log(event);
       this.current_action = action;
       this.updateSubActions();
-    }
+    //}
   }
   setSubAction(event, sub_action: {}) {
     this.languages = null;
@@ -144,32 +145,71 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.retreiveActions();
   }
-
+  deleteAction(action)
+  {
+      this.apiService.deleteAction(
+        action._id, 
+        (resp)=>{
+          this.showSnackBar("Successfully Deleted Action!");
+          this.retreiveActions();
+          this.current_action = null;
+        },
+        (err) => {
+          console.log(err);
+        });
+  }
   addAction() {
     const dialogRef = this.dialog.open(ActionModalDialog, {
       width: '500px',
       data: {
+        edit: false,
+        _id: null,
         name: null
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("Back :)");
-      this.retreiveActions();
+      if(result)
+      {
+        this.showSnackBar("Successfully added Action!");
+        this.retreiveActions();
+       // this.setAction(null, result);
+      }
+      else
+      {
+        this.showSnackBar("Sorry, some error occured!");
+      }
     });
   }
 
+  showSnackBar(msg: String){
+    this._snackBar.openFromComponent(SnackBarTempComponent, {
+      duration: 5 * 1000,
+      data: {msg: msg}
+    });
+  }
   editAction(act) {
 
     const dialogRef = this.dialog.open(ActionModalDialog, {
       width: '500px',
       data: {
+        edit: true,
         _id: act["_id"],
         name: act["name"]
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.showSnackBar("Successfully edited Action!");
+        this.retreiveActions();
+      }
+      else
+      {
+        this.showSnackBar("Sorry, some error occured!");
+      }
       console.log("Back :)");
     });
 
@@ -195,4 +235,19 @@ export class DashboardComponent implements OnInit {
   options = {
     theme: "vs-dark"
   };
+}
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  templateUrl: 'snack-bar-component-example-snack.html',
+  styles: [`
+    .example-pizza-party {
+      color: blue;
+    }
+  `],
+})
+export class SnackBarTempComponent {
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: {}){
+
+  }
 }

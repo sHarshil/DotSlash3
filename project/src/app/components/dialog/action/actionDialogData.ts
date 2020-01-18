@@ -1,3 +1,5 @@
 export interface ActionDialogData {
-    name: string;
+    _id: string,
+    name: string,
+    edit: Boolean;
 }
