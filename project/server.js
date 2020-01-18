@@ -58,10 +58,8 @@ app.get("/api/actions", function(req, res) {
 
   
 app.post("/api/actions", function(req, res) {
-  var newAction = req.body;
-  newAction.createDate = new Date();
   var bb = {
-      "name": req.body,
+      "name": req.body.name,
       "createDate": new Date()
   }
   if (!req.body.name) {
@@ -93,9 +91,6 @@ app.get("/api/action/:id", function(req, res)
   
 app.post("/api/action/:id", function(req, res) 
 {
-    var newSubAction = req.body;
-    newSubAction.createDate = new Date();
-    
     // ToDo: Check if action ID exists or not
 
     if (!req.body.name) {
