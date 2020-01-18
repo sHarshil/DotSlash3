@@ -62,15 +62,13 @@
 
         <tr *ngIf="current_language != null">
           <td>
-            <p>Instructions:</p>
+            <span>Instructions:</span>
+            <span>                {{current_language.instructions}}
+              </span>
           </td>
 
         </tr>
-        <tr *ngIf="current_language != null">
-            <td>
-                {{current_language.instructions}}
-            </td>
-        </tr>
+
       </div>
     </div>
 
