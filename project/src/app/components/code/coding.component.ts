@@ -76,7 +76,7 @@ export class CodingComponent implements OnInit {
     if (event.isUserInput) {
       console.log(event);
       this.current_language = template;
-      this.code = this.current_language["template"];
+      this.editorOptions.language = this.current_language["language"].toLowerCase();
     }
   }
 
@@ -149,6 +149,7 @@ export class CodingComponent implements OnInit {
     language: "javascript"
   };
 
+  instructions: string = null;
   code: string = null;
 
   options = {

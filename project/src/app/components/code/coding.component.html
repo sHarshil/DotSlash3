@@ -60,30 +60,28 @@
 
         </tr>
 
-        <tr *ngIf="current_sub_action != null">
+        <tr *ngIf="current_language != null">
           <td>
             <p>Instructions:</p>
           </td>
-          <td>
-
-          </td>
-
 
         </tr>
-
-
+        <tr *ngIf="current_language != null">
+            <td>
+                {{current_language.instructions}}
+            </td>
+        </tr>
       </div>
-
     </div>
 
     <div fxFlex="50">
-      <div *ngIf="code != null">
+      <div *ngIf="current_language != null">
         <div style="margin-bottom: 20px; width: 100%; height: auto;">
           <span style="align-self: center;">Code:</span>
           <button style="align-self: center; float: right; " mat-stroked-button color="primary"
             (click)="copy()">Copy</button>
         </div>
-        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="current_language.template"></ngx-monaco-editor>
       </div>
     </div>
   </div>
