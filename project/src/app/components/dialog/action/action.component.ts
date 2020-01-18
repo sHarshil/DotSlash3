@@ -23,7 +23,7 @@ export class ActionModalDialog implements OnInit {
     }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   addAction(): void{
@@ -34,7 +34,7 @@ export class ActionModalDialog implements OnInit {
     (err) => {
         console.log(err);
         alert("Error");
-        this.dialogRef.close(false);
+        this.dialogRef.close({"error": err});
     });
   }
 
@@ -48,6 +48,7 @@ export class ActionModalDialog implements OnInit {
     (err) => {
         console.log(err);
         alert("Error");
+        this.dialogRef.close({"error":true});
     });
   }
 

@@ -32,7 +32,7 @@ export class TemplateModalDialog implements OnInit {
     }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   addTemplate(): void{
@@ -40,13 +40,14 @@ export class TemplateModalDialog implements OnInit {
       this.data.sub_action_id,
       this.data.language,
       this.data.template,
+      this.data.instructions,
     (resp) => {
         this.dialogRef.close(resp);
     },
     (err) => {
         console.log(err);
         alert("Error");
-        this.dialogRef.close(false);
+        this.dialogRef.close({"error":true});
     });
   }
 
@@ -55,12 +56,14 @@ export class TemplateModalDialog implements OnInit {
         this.data._id,
         this.data.language,
         this.data.template,
+        this.data.instructions,
       (resp) => {
         this.dialogRef.close(resp);
     },
     (err) => {
         console.log(err);
         alert("Error");
+        this.dialogRef.close({"error":true});
     });
   }
 
