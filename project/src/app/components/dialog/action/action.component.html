@@ -1,7 +1,6 @@
 <h1 mat-dialog-title *ngIf="!data.edit">Add Action</h1>
 <h1 mat-dialog-title *ngIf="data.edit">Edit Action</h1>
 <div mat-dialog-content>
-    <!-- Current Name: {{data.name}} -->
   <mat-form-field>  
     <mat-label>Enter Action name</mat-label>
     <input matInput [(ngModel)]="data.name">

@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MonacoEditorModule } from "ngx-monaco-editor";
 import { DashboardComponent, SnackBarTempComponent } from './components/dashboard/dashboard.component';
 import { ActionModalDialog } from './components/dialog/action/action.component';
+import { SubActionModalDialog } from './components/dialog/subaction/sub-action.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ActionModalDialog } from './components/dialog/action/action.component';
     CodingComponent,
     DashboardComponent,
     ActionModalDialog,
-    SnackBarTempComponent
+    SnackBarTempComponent,
+    SubActionModalDialog
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { ActionModalDialog } from './components/dialog/action/action.component';
     FormsModule,
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
-  entryComponents:[ActionModalDialog, SnackBarTempComponent],
+  entryComponents:[ActionModalDialog, SnackBarTempComponent,SubActionModalDialog],
   providers: [],
   bootstrap: [AppComponent]
 })
