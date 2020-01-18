@@ -294,7 +294,9 @@ addTemplate() {
       edit: false,
       _id: null,
       language: null,
-      template: null
+      template: null,
+      action_name: this.current_action["name"],
+      sub_action_name: this.current_sub_action["name"]
     }
   });
 
@@ -321,7 +323,9 @@ editTemplate(act) {
       edit: true,
       _id: act["_id"],
       language: act["language"],
-      template: act["template"]
+      template: act["template"],
+      action_name: this.current_action["name"],
+      sub_action_name: this.current_sub_action["name"]
     }
   });
 

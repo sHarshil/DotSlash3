@@ -3,5 +3,8 @@ export interface templateDialogData {
     language: string,
     edit: Boolean,
     template: string,
-    sub_action_id: string;
+    sub_action_id: string,
+
+    action_name: string,
+    sub_action_name: string
 }
