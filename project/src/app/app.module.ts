@@ -9,11 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WelcomeComponent } from './components/welcome.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClientModule } from '@angular/common/http';
+import { CodingComponent } from './components/code/coding.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    CodingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<mat-card appDnd>
+    <mat-card-title>Snippet</mat-card-title>
+    <div>
+      <mat-spinner [diameter]="40" *ngIf="isLoading"></mat-spinner>
+      <span *ngIf="isError"
+        >&nbsp;&nbsp;&nbsp;There was some error. Sorry :(</span
+      >
+    </div>
+    
+    <div style="margin:10px; margin-top: 20px;">
+        Help:
+        <div>
+          <button mat-icon-button color="warn">
+            <mat-icon aria-label="">cancel</mat-icon>
+          </button>
+          This will delete the uploaded file.
+        </div>
+        <div>
+          <button mat-icon-button color="primary">
+            <mat-icon aria-label="">cloud_done</mat-icon>
+          </button>
+          This means that the file is successfully uploaded.
+        </div>
+  
+        <div>
+          <button mat-icon-button color="warn">
+            <mat-icon aria-label="">replay</mat-icon>
+          </button>
+          Clicking on this will upload the file again. This will be showed only if
+          there was an error.
+        </div>
+        <div>
+          <button mat-icon-button color="primary">
+            <mat-icon aria-label="">vertical_align_bottom</mat-icon>
+          </button>
+          Clicking this will download the file
+        </div>
+      </div>
+  
+      <hr/>
+  </mat-card>
+  
