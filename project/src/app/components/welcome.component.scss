@@ -1,0 +1,107 @@
+
+/* --------- heading --------- */
+
+.heading-section{
+    text-align: center;
+  }
+  
+  .heading-section h1{
+    font-size: 58px;
+  }
+  
+  .heading-section h2{
+    margin-top: 30px;
+  }
+  
+  .heading-button-left{
+    min-width: 144px;
+    max-width: 100%;
+  }
+  
+  .heading-button-right{
+    margin-left: 10px;
+  }
+  
+  .z-depth-1-half {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -1px rgba(0, 0, 0, 0.2);
+      margin:10px;
+  }
+  // .devImg{
+  // //border-radius: 50%;
+  // height: 150px;
+  // width: 145px;
+  // }
+  
+  // .parent{
+  //   text-align: center;
+  // }
+  
+  // .child{
+  //   display: inline-block;
+  // }
+  
+  // .profile{
+  //   height: 30px;
+  //   width: 30px;
+  // }
+  
+  // .centerImage{
+  //   display: block;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+  
+  // .dev{
+  // font-family: Georgia, 'Times New Roman', Times, serif;
+  // font-size: 30px;
+  // font-weight: bold;
+  // }
+  
+  
+  .about-section{
+    text-align: center;
+  }
+  
+  .about-heading{
+    padding-bottom: 30px;
+  }
+  
+  .about-heading h2{
+    font-size: 32px;
+  }
+  
+  .about-heading h3{
+    font-size: 22px;
+  }
+  
+  .about-text{
+    text-align: center;
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 68px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    color: #2196f3;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+  
