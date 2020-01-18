@@ -13,12 +13,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { CodingComponent } from "./components/code/coding.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MonacoEditorModule } from "ngx-monaco-editor";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    CodingComponent
+    CodingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
