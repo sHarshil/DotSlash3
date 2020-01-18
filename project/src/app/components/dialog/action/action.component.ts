@@ -43,7 +43,7 @@ export class ActionModalDialog implements OnInit {
         this.data._id, 
         this.data.name, 
     (resp) => {
-        this.dialogRef.close(true);
+        this.dialogRef.close(resp);
     },
     (err) => {
         console.log(err);
