@@ -34,4 +34,42 @@ export class APIService {
             }
           );
     }
+    public getSubActions(action_id, success, failure): void 
+    {
+        this.httpClient
+          .get(environment.backend_url + "/action/" + action_id, {
+            responseType: "text",
+          })
+          .subscribe(
+            res => {
+              const response = JSON.parse(res);
+              console.log(response);
+              success(response);
+            },
+            err => {
+              console.log(err);
+              failure(err);
+            }
+          );
+    }
+    public getTemplates(sub_action_id, success, failure): void 
+    {
+        this.httpClient
+          .get(environment.backend_url + "/templates/" + sub_action_id, {
+            responseType: "text",
+          })
+          .subscribe(
+            res => {
+              const response = JSON.parse(res);
+              console.log(response);
+              success(response);
+            },
+            err => {
+              console.log(err);
+              failure(err);
+            }
+          );
+    }
+
+
 }

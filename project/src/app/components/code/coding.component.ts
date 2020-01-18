@@ -22,8 +22,14 @@ export interface Food {
 export class CodingComponent implements OnInit 
 {
     public isLoading: Boolean = true;
+    
     public actions: {};
+    public sub_actions: {};
+    public languages: {};
+    
     public current_action: {} = null;
+    public current_sub_action: {} = null;
+    public current_language: {} = null;
 
     constructor(private httpClient: HttpClient, 
         private router: Router, 
@@ -33,6 +39,11 @@ export class CodingComponent implements OnInit
 
     setAction(event, action: {})
     {
+        this.current_sub_action = null;
+        this.sub_actions = null;
+        this.languages = null;
+        this.current_language = null;
+
         if (event.isUserInput)
         {
             console.log(event);
@@ -40,10 +51,66 @@ export class CodingComponent implements OnInit
             this.updateSubActions();
         }
     }
+    setSubAction(event, sub_action: {})
+    {
+        this.languages = null;
+        this.current_language = null;
+        if (event.isUserInput)
+        {
+            console.log(event);
+            this.current_sub_action = sub_action;
+            this.updateLanguages();
+        }
+    }
+
+    setLanguage(event, template: {})
+    {
+        if (event.isUserInput)
+        {
+            console.log(event);
+            this.current_language = template;
+        }
+    }
+
+    updateLanguages() {
+        this.isLoading = true;
+
+        console.log("Updating");
+        console.log(this.current_sub_action);
+
+        this.apiService.getTemplates(this.current_sub_action["_id"],
+        (languages) => {
+            this.isLoading = false;
+            this.languages = languages;
+            console.log(languages);
+        },
+        (error) => {
+            this.isLoading = false;
+            alert(error);
+            console.log(error);
+        }
+    );
+
+    }
 
     updateSubActions() {
+        this.isLoading = true;
         console.log("Updating");
         console.log(this.current_action);
+
+        this.apiService.getSubActions(this.current_action["_id"],
+            (sub_actions) => {
+                this.isLoading = false;
+                this.sub_actions = sub_actions;
+                console.log(sub_actions);
+            },
+            (error) => {
+                this.isLoading = false;
+                alert(error);
+                console.log(error);
+            }
+        );
+    
     }
     
     onActionSelect(e) {

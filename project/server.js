@@ -185,7 +185,7 @@ app.post("/api/templates/:subaction_id", function (req, res) {
 
   var bb = {
     subaction_id: ObjectID(req.params.subaction_id),
-    language: req.body.name,
+    language: req.body.language,
     template: req.body.template,
     instructions: req.params.instructions,
     createDate: new Date()
