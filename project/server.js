@@ -77,7 +77,7 @@ app.post("/api/actions", function (req, res) {
 });
 
 app.get("/api/action/:id", function (req, res) {
-  db.collection(constants.SUBACTIONS_COLLECTION).find({ "action_id": req.params.id }).toArray(function (err, docs) {
+  db.collection(constants.SUBACTIONS_COLLECTION).find({ "action_id": ObjectID(req.params.id) }).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get actions.");
     } else {
@@ -98,7 +98,7 @@ app.post("/api/action/:id", function (req, res) {
   }
   var bb = {
     "name": req.body.name,
-    "action_id": req.params.id,
+    "action_id": ObjectID(req.params.id),
     "createDate": new Date()
   }
 
@@ -114,7 +114,7 @@ app.post("/api/action/:id", function (req, res) {
 });
 
 app.get("/api/templates/:subaction", function (req, res) {
-  db.collection(constants.TEMPLATES_COLLECTION).find({ "subaction_id": req.params.subaction }).toArray(function (err, docs) {
+  db.collection(constants.TEMPLATES_COLLECTION).find({ "subaction_id": ObjectID(req.params.subaction) }).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get actions.");
     } else {
@@ -153,7 +153,7 @@ app.post("/api/templates/:subaction_id", function (req, res) {
   // ToDo: Check if subaction ID exists or not
 
   var bb = {
-    "subaction_id": req.params.subaction_id,
+    "subaction_id": ObjectID(req.params.subaction_id),
     "language": req.body.name,
     "template": req.body.template,
     "instructions": req.params.instructions,
@@ -177,29 +177,29 @@ app.post("/api/templates/:subaction_id", function (req, res) {
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/contacts/:id", function (req, res) {
-  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contact");
-    } else {
-      res.status(200).json(doc);
-    }
-  });
-});
+// app.get("/api/contacts/:id", function (req, res) {
+//   db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to get contact");
+//     } else {
+//       res.status(200).json(doc);
+//     }
+//   });
+// });
 
-app.put("/api/contacts/:id", function (req, res) {
-  var updateDoc = req.body;
-  delete updateDoc._id;
+// app.put("/api/contacts/:id", function (req, res) {
+//   var updateDoc = req.body;
+//   delete updateDoc._id;
 
-  db.collection(CONTACTS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to update contact");
-    } else {
-      updateDoc._id = req.params.id;
-      res.status(200).json(updateDoc);
-    }
-  });
-});
+//   db.collection(CONTACTS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to update contact");
+//     } else {
+//       updateDoc._id = req.params.id;
+//       res.status(200).json(updateDoc);
+//     }
+//   });
+// });
 
 app.delete("/api/action/:id", function (req, res) {
   db.collection(constants.ACTIONS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
@@ -207,6 +207,27 @@ app.delete("/api/action/:id", function (req, res) {
       handleError(res, err.message, "Failed to delete contact");
     } else {
       res.status(200).json(req.params.id);
+    }
+  });
+});
+
+// app.delete("/api/action/:id", function (req, res) {
+//   db.collection(constants.ACTIONS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+//     if (err) {
+//       handleError(res, err.message, "Failed to delete contact");
+//     } else {
+//       res.status(200).json(req.params.id);
+//     }
+//   });
+// });
+
+
+app.delete("/api/template/:templateid", function (req, res) {
+  db.collection(constants.TEMPLATES_COLLECTION).deleteOne({ _id: new ObjectID(req.params.templateid) }, function (err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(200).json(req.params.templateid);
     }
   });
 });
