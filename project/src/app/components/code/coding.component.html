@@ -59,6 +59,8 @@
    </div>
    <p>Code:
         <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+        <button (click)="copy()">Copy</button>
     </p>
   
 </mat-card>

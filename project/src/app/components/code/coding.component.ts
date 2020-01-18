@@ -70,6 +70,8 @@ export class CodingComponent implements OnInit
         {
             console.log(event);
             this.current_language = template;
+            this.code= this.current_language["template"];
+
         }
     }
 
@@ -132,7 +134,10 @@ export class CodingComponent implements OnInit
         }
         );
     }
-
+    copy()
+    {
+        //alert(this.code);
+    }
     /*
     Coding-Area
     */
