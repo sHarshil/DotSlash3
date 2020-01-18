@@ -1,4 +1,3 @@
-import { CodingAreaComponent } from "./components/coding-area/coding-area.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { WelcomeComponent } from "./components/welcome.component";
@@ -12,10 +11,6 @@ const routes: Routes = [
   {
     path: "code",
     component: CodingComponent
-  },
-  {
-    path: "codearea",
-    component: CodingAreaComponent
   }
 ];
 

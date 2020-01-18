@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, Validators } from "@angular/forms";
 import { APIService } from 'src/app/services/api.service';
+import { DiffEditorModel } from 'ngx-monaco-editor';
 
 
 export interface Food {
@@ -131,4 +132,21 @@ export class CodingComponent implements OnInit
         }
         );
     }
+
+    /*
+    Coding-Area
+    */
+    editorOptions = { 
+        theme: "vs-dark", 
+        language: "javascript"
+    };
+  
+    code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+
+    options = 
+    {
+        theme: "vs-dark"
+    };
+
+
 }
