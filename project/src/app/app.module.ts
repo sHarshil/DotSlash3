@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MonacoEditorModule } from "ngx-monaco-editor";
 import { DashboardComponent, SnackBarTempComponent } from './components/dashboard/dashboard.component';
 import { ActionModalDialog } from './components/dialog/action/action.component';
-import { SubActionModalDialog } from './components/dialog/subaction/action.component';
+import { SubActionModalDialog } from './components/dialog/subaction/sub-action.component';
 
 @NgModule({
   declarations: [

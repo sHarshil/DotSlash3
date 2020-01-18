@@ -1,15 +1,13 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SubActionDialogData } from './actionDialogData';
+import { SubActionDialogData } from './sub-actionDialogData';
 import { APIService } from 'src/app/services/api.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 @Component({
-  selector: 'action-app-dialog',
-  templateUrl: './action.component.html',
-  styleUrls: ['./action.component.css']
+  selector: 'sub-action-app-dialog',
+  templateUrl: './sub-action.component.html',
+  styleUrls: ['./sub-action.component.css']
 })
 export class SubActionModalDialog implements OnInit {
 
@@ -26,8 +24,10 @@ export class SubActionModalDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  addAction(): void{
-    this.apiService.makeSubAction(this.data.name, 
+  addSubAction(): void{
+    this.apiService.makeSubAction(
+      this.data.action_id,
+      this.data.name, 
     (resp) => {
         this.dialogRef.close(resp);
     },
@@ -38,7 +38,7 @@ export class SubActionModalDialog implements OnInit {
     });
   }
 
-  editAction(): void {
+  editSubAction(): void {
     this.apiService.editSubAction(
         this.data._id, 
         this.data.name, 

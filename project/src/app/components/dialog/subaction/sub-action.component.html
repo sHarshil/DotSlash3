@@ -8,6 +8,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="addAction()" *ngIf="!data.edit">Add</button>
-  <button mat-button cdkFocusInitial (click)="editAction()" *ngIf="data.edit">Edit</button>
+  <button mat-button cdkFocusInitial (click)="addSubAction()" *ngIf="!data.edit">Add</button>
+  <button mat-button cdkFocusInitial (click)="editSubAction()" *ngIf="data.edit">Edit</button>
 </div>

@@ -16,7 +16,7 @@ import { APIService } from "src/app/services/api.service";
 import { DiffEditorModel } from "ngx-monaco-editor";
 import { ActionModalDialog } from '../dialog/action/action.component';
 import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material';
-import { SubActionModalDialog } from '../dialog/subaction/action.component';
+import { SubActionModalDialog } from '../dialog/subaction/sub-action.component';
 
 export interface Food {
   value: string;
@@ -224,7 +224,8 @@ addSubAction() {
       data: {
         edit: false,
         _id: null,
-        name: null
+        name: null,
+        action_id: this.current_action["_id"]
       }
     });
 
