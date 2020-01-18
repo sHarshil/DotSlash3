@@ -331,9 +331,7 @@ editTemplate(act) {
       this.showSnackBar("Successfully edited Template!");
       this.current_sub_action = result;
       console.log(result);
-
       this.updateLanguages();
-
       //this.retreiveActions();
     }
     else
@@ -347,7 +345,7 @@ editTemplate(act) {
 
 deleteTemplate(action)
 {
-    this.apiService.deleteSubAction(
+    this.apiService.deleteTemplate(
       action._id, 
       (resp)=>{
         this.showSnackBar("Successfully Deleted Sub-Action!");
