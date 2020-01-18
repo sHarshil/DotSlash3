@@ -14,13 +14,15 @@ import { CodingComponent } from "./components/code/coding.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MonacoEditorModule } from "ngx-monaco-editor";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ActionModalDialog } from './components/dialog/action/action.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     CodingComponent,
-    DashboardComponent
+    DashboardComponent,
+    ActionModalDialog
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule,
     MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
+  entryComponents:[ActionModalDialog],
   providers: [],
   bootstrap: [AppComponent]
 })

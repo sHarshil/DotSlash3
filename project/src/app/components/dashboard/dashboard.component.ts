@@ -14,6 +14,8 @@ import { environment } from "src/environments/environment";
 import { FormBuilder, Validators } from "@angular/forms";
 import { APIService } from "src/app/services/api.service";
 import { DiffEditorModel } from "ngx-monaco-editor";
+import { ActionModalDialog } from '../dialog/action/action.component';
+import { MatDialog } from '@angular/material';
 
 export interface Food {
   value: string;
@@ -41,7 +43,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public applicationStateService: ApplicationStateService,
-    public apiService: APIService
+    public apiService: APIService,
+    public dialog: MatDialog
   ) {}
 
   setAction(event, action: {}) {
@@ -124,7 +127,7 @@ export class DashboardComponent implements OnInit {
   onActionSelect(e) {
     console.log(e);
   }
-  ngOnInit() {
+  retreiveActions() {
     this.apiService.getActions(
       actions => {
         this.isLoading = false;
@@ -138,6 +141,43 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  ngOnInit() {
+    this.retreiveActions();
+  }
+
+  addAction() {
+    const dialogRef = this.dialog.open(ActionModalDialog, {
+      width: '500px',
+      data: {
+        name: null
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Back :)");
+      this.retreiveActions();
+    });
+  }
+
+  editAction(act) {
+
+    const dialogRef = this.dialog.open(ActionModalDialog, {
+      width: '500px',
+      data: {
+        _id: act["_id"],
+        name: act["name"]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Back :)");
+    });
+
+  }
+  deleteActionAction(act) {
+
+  }
+
   copy() {
     //alert(this.code);
   }
