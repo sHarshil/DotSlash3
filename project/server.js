@@ -38,7 +38,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
-  res.status(code || 500).json({"error": message});
+  res.status(code || 500).json({ "error": message });
 }
 
 /*  "/api/contacts"
@@ -46,8 +46,8 @@ function handleError(res, reason, message, code) {
  *    POST: creates a new contact
  */
 
-app.get("/api/actions", function(req, res) {
-  db.collection(constants.ACTIONS_COLLECTION).find({}).toArray(function(err, docs) {
+app.get("/api/actions", function (req, res) {
+  db.collection(constants.ACTIONS_COLLECTION).find({}).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get actions.");
     } else {
@@ -56,20 +56,19 @@ app.get("/api/actions", function(req, res) {
   });
 });
 
-  
-app.post("/api/actions", function(req, res) {
+
+app.post("/api/actions", function (req, res) {
   var newAction = req.body;
   newAction.createDate = new Date();
   var bb = {
-      "name": req.body,
-      "createDate": new Date()
+    "name": req.body,
+    "createDate": new Date()
   }
   if (!req.body.name) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
-  } 
-  else
-  {
-    db.collection(constants.ACTIONS_COLLECTION).insertOne(bb, function(err, doc) {
+  }
+  else {
+    db.collection(constants.ACTIONS_COLLECTION).insertOne(bb, function (err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to create new contact.");
       } else {
@@ -79,116 +78,109 @@ app.post("/api/actions", function(req, res) {
   }
 });
 
-app.get("/api/action/:id", function(req, res) 
-{
-    db.collection(constants.SUBACTIONS_COLLECTION).find({"action_id": req.params.id}).toArray(function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get actions.");
-        } else {
-          res.status(200).json(docs);
-        }
-      });
-    
-});
-  
-app.post("/api/action/:id", function(req, res) 
-{
-    var newSubAction = req.body;
-    newSubAction.createDate = new Date();
-    
-    // ToDo: Check if action ID exists or not
-
-    if (!req.body.name) {
-      handleError(res, "Invalid user input", "Must provide a name.", 400);
+app.get("/api/action/:id", function (req, res) {
+  db.collection(constants.SUBACTIONS_COLLECTION).find({ "action_id": req.params.id }).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get actions.");
+    } else {
+      res.status(200).json(docs);
     }
-    var bb = {
-        "name": req.body.name,
-        "action_id": req.params.id,
-        "createDate": new Date()
+  });
+
+});
+
+app.post("/api/action/:id", function (req, res) {
+  var newSubAction = req.body;
+  newSubAction.createDate = new Date();
+
+  // ToDo: Check if action ID exists or not
+
+  if (!req.body.name) {
+    handleError(res, "Invalid user input", "Must provide a name.", 400);
+  }
+  var bb = {
+    "name": req.body.name,
+    "action_id": req.params.id,
+    "createDate": new Date()
+  }
+
+  db.collection(constants.SUBACTIONS_COLLECTION).insertOne(bb,
+    function (err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new Subaction.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
     }
-
-    db.collection(constants.SUBACTIONS_COLLECTION).insertOne(bb, 
-        function(err, doc) 
-        {
-            if (err) {
-                handleError(res, err.message, "Failed to create new Subaction.");
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );
+  );
 });
 
-app.get("/api/templates/:subaction", function(req, res) 
-{
-    db.collection(constants.TEMPLATES_COLLECTION).find({"subaction_id": req.params.subaction}).toArray(function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get actions.");
-        } else {
-          res.status(200).json(docs);
-        }
-      });
-    
+app.get("/api/templates/:subaction", function (req, res) {
+  db.collection(constants.TEMPLATES_COLLECTION).find({ "subaction_id": req.params.subaction }).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get actions.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+
 });
 
-app.get("/api/template/:templateid", function(req, res) 
-{
-    console.log(req.params.templateid);
-    db.collection(constants.TEMPLATES_COLLECTION).find({"_id": ObjectID(req.params.templateid)}).toArray(function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get templates.");
-        } else {
-          res.status(200).json(docs);
-        }
-      });
+app.get("/api/template/:templateid", function (req, res) {
+  console.log(req.params.templateid);
+  db.collection(constants.TEMPLATES_COLLECTION).find({ "_id": ObjectID(req.params.templateid) }).toArray(function (err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get templates.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
 });
 
 
-app.post("/api/templates/:subaction_id", function(req, res) 
-{
-    var newSubAction = req.body;
-    newSubAction.createDate = new Date();
-    
-    if (!req.body.language) {
-      handleError(res, "Invalid user input", "Must provide a Language name", 400);
-    }
-    if (!req.body.template) {
-        handleError(res, "Invalid user input", "Must provide a Template", 400);
-    }
-    if (!req.body.instructions) {
-        handleError(res, "Invalid user input", "Must provide Instructions", 400);
-    }
-    
-    // ToDo: Check if subaction ID exists or not
+app.post("/api/templates/:subaction_id", function (req, res) {
+  var newSubAction = req.body;
+  newSubAction.createDate = new Date();
 
-    var bb = {
-        "subaction_id": req.params.subaction_id,
-        "language": req.body.name,
-        "template": req.body.template,
-        "instructions" : req.params.instructions,
-        "createDate": new Date()
-    }
+  if (!req.body.language) {
+    handleError(res, "Invalid user input", "Must provide a Language name", 400);
+  }
+  if (!req.body.template) {
+    handleError(res, "Invalid user input", "Must provide a Template", 400);
+  }
+  if (!req.body.instructions) {
+    handleError(res, "Invalid user input", "Must provide Instructions", 400);
+  }
 
-    db.collection(constants.TEMPLATES_COLLECTION).insertOne(bb, 
-        function(err, doc) 
-        {
-            if (err) {
-                handleError(res, err.message, "Failed to create new template.");
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );  
+  // ToDo: Check if subaction ID exists or not
+
+  var bb = {
+    "subaction_id": req.params.subaction_id,
+    "language": req.body.name,
+    "template": req.body.template,
+    "instructions": req.params.instructions,
+    "createDate": new Date()
+  }
+
+  db.collection(constants.TEMPLATES_COLLECTION).insertOne(bb,
+    function (err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new template.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    }
+  );
 });
-  
+
 /*  "/api/contacts/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
 
-app.get("/api/contacts/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+app.get("/api/contacts/:id", function (req, res) {
+  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get contact");
     } else {
@@ -197,11 +189,11 @@ app.get("/api/contacts/:id", function(req, res) {
   });
 });
 
-app.put("/api/contacts/:id", function(req, res) {
+app.put("/api/contacts/:id", function (req, res) {
   var updateDoc = req.body;
   delete updateDoc._id;
 
-  db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+  db.collection(CONTACTS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to update contact");
     } else {
@@ -211,8 +203,8 @@ app.put("/api/contacts/:id", function(req, res) {
   });
 });
 
-app.delete("/api/contacts/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+app.delete("/api/action/:id", function (req, res) {
+  db.collection(constants.ACTIONS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
     if (err) {
       handleError(res, err.message, "Failed to delete contact");
     } else {
