@@ -295,6 +295,7 @@ addTemplate() {
       _id: null,
       language: null,
       template: null,
+      instructions: null,
       action_name: this.current_action["name"],
       sub_action_name: this.current_sub_action["name"]
     }
@@ -324,6 +325,7 @@ editTemplate(act) {
       _id: act["_id"],
       language: act["language"],
       template: act["template"],
+      instructions: act["instructions"],
       action_name: this.current_action["name"],
       sub_action_name: this.current_sub_action["name"]
     }
