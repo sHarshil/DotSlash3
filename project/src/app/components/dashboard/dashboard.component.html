@@ -7,7 +7,7 @@
 
 
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
-    <div fxFlex="50">
+    <div fxFlex="75">
       <div [hidden]="false" class="container1">
         <tr>
           <td width="200px">
@@ -23,23 +23,23 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </td>&nbsp;
-          <td>
-            <button mat-raised-button color="primary" (click)="addAction()"><i class="material-icons">
-                add
-              </i>Add New</button>
-          </td>&nbsp;
+          </td>
+
           <td *ngIf="current_action !=null">
 
             <button mat-raised-button color="primary" (click)="editAction(current_action)"><i class="material-icons">
                 edit
               </i>Edit</button>
-          </td>&nbsp;
+          </td>
           <td *ngIf="current_action !=null">
-            <button mat-raised-button color="warn" (click)="deleteAction(current_action)"><i
-                class="material-icons">
+            <button mat-raised-button color="warn" (click)="deleteAction(current_action)"><i class="material-icons">
                 delete
               </i>Delete</button>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" (click)="addAction()"><i class="material-icons">
+                add
+              </i>Add New</button>
           </td>
         </tr>
         <tr *ngIf="current_action != null">
@@ -57,6 +57,22 @@
               </mat-select>
             </mat-form-field>
           </td>
+          <td *ngIf="current_action !=null">
+
+              <button mat-raised-button color="primary" (click)="editSubAction(current_action)"><i class="material-icons">
+                  edit
+                </i>Edit</button>
+            </td>
+            <td *ngIf="current_action !=null">
+              <button mat-raised-button color="warn" (click)="deleteSubAction(current_action)"><i class="material-icons">
+                  delete
+                </i>Delete</button>
+            </td>
+            <td>
+              <button mat-raised-button color="primary" (click)="addSubAction()"><i class="material-icons">
+                  add
+                </i>Add New</button>
+            </td>
         </tr>
         <tr *ngIf="current_sub_action != null">
           <td>
@@ -74,12 +90,15 @@
             </mat-form-field>
           </td>
 
+
         </tr>
 
         <tr *ngIf="current_language != null">
           <td>
             <p>Instructions:</p>
           </td>
+
+
 
         </tr>
         <tr *ngIf="current_language != null">
@@ -90,7 +109,7 @@
       </div>
     </div>
 
-    <div fxFlex="50">
+    <div fxFlex="25">
       <div *ngIf="current_language != null">
         <div style="margin-bottom: 20px; width: 100%; height: auto;">
           <span style="align-self: center;">Code:</span>
