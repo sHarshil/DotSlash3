@@ -18,7 +18,7 @@
               <mat-label></mat-label>
               <mat-select #action_select>
                 <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
-                  [value]="action.name">
+                  [value]="action._id">
                   {{ action.name }}
                 </mat-option>
               </mat-select>
@@ -48,9 +48,9 @@
           <td>
             <mat-form-field>
               <mat-label></mat-label>
-              <mat-select>
+              <mat-select #sub_action_select>
                 <mat-option (onSelectionChange)="setSubAction($event, sub_action)"
-                  *ngFor="let sub_action of sub_actions" [value]="sub_action.name">
+                  *ngFor="let sub_action of sub_actions" [value]="sub_action._id">
                   {{ sub_action.name }}
                 </mat-option>
               </mat-select>
@@ -80,9 +80,9 @@
           <td>
             <mat-form-field>
               <mat-label></mat-label>
-              <mat-select>
+              <mat-select #language_select>
                 <mat-option (onSelectionChange)="setLanguage($event, template)" *ngFor="let template of languages"
-                  [value]="template.language">
+                  [value]="template._id">
                   {{ template.language }}
                 </mat-option>
               </mat-select>

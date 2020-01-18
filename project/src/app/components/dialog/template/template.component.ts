@@ -36,6 +36,9 @@ export class TemplateModalDialog implements OnInit {
   }
 
   addTemplate(): void{
+    
+    //console.log(this.data.template);
+
     this.apiService.makeTemplate(
       this.data.sub_action_id,
       this.data.language,

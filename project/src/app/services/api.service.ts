@@ -74,7 +74,7 @@ export class APIService {
     public makeTemplate(sub_action_id, language, template, instructions, success, failure): void 
     {
         var data = {
-            "langage" : language,
+            "language" : language,
             "template": template,
             "instructions": instructions,
         };

@@ -37,7 +37,10 @@ export class DashboardComponent implements OnInit {
   public current_language: {} = null;
 
   @ViewChild('action_select',{static:false}) action_select: MatSelect;
-
+  @ViewChild('sub_action_select',{static:false}) sub_action_select: MatSelect;
+  @ViewChild('language_select',{static:false}) language_select: MatSelect;
+  
+  
   constructor(
     private httpClient: HttpClient,
     private router: Router,
@@ -55,7 +58,6 @@ export class DashboardComponent implements OnInit {
     this.languages = null;
     this.current_language = null;
 
-    this.code = null;
 
     if (event.isUserInput) {
       console.log(event);
@@ -66,8 +68,6 @@ export class DashboardComponent implements OnInit {
   setSubAction(event, sub_action: {}) {
     this.languages = null;
     this.current_language = null;
-
-    this.code = null;
 
     if (event.isUserInput) {
       console.log(event);
@@ -84,18 +84,23 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  updateLanguages() {
+  updateLanguages(val=false) {
     this.isLoading = true;
 
-    console.log("Updating");
+    console.log("Current Sub-Action ");
     console.log(this.current_sub_action);
 
     this.apiService.getTemplates(
       this.current_sub_action["_id"],
-      languages => {
+      (languages) => {
         this.isLoading = false;
         this.languages = languages;
+        console.log("Languages:");
         console.log(languages);
+        if(val)
+        {
+          this.language_select.value = val;
+        }
       },
       error => {
         this.isLoading = false;
@@ -105,7 +110,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  updateSubActions() {
+  updateSubActions(val= false) {
     this.isLoading = true;
     console.log("Updating");
     console.log(this.current_action);
@@ -116,6 +121,9 @@ export class DashboardComponent implements OnInit {
         this.isLoading = false;
         this.sub_actions = sub_actions;
         console.log(sub_actions);
+        if(val) {
+          this.sub_action_select.value = val;
+        }
       },
       error => {
         this.isLoading = false;
@@ -128,12 +136,15 @@ export class DashboardComponent implements OnInit {
   onActionSelect(e) {
     console.log(e);
   }
-  retreiveActions() {
+  updateActions(val = false) {
     this.apiService.getActions(
       actions => {
         this.isLoading = false;
         this.actions = actions;
         console.log(actions);
+        if(val) {
+            this.action_select.value = val;
+        }
       },
       error => {
         this.isLoading = false;
@@ -143,7 +154,7 @@ export class DashboardComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.retreiveActions();
+    this.updateActions();
   }
 
   showSnackBar(msg: String){
@@ -171,7 +182,7 @@ export class DashboardComponent implements OnInit {
       else if(result)
       {
         this.showSnackBar("Successfully added Action!");
-        this.retreiveActions();
+        this.updateActions(result._id);
        // this.setAction(null, result);
       }
       else if(result["error"]){
@@ -199,14 +210,13 @@ export class DashboardComponent implements OnInit {
       else if(result)
       {
         this.showSnackBar("Successfully edited Action!");
-        this.retreiveActions();
+        this.updateActions(result._id);
        // this.setAction(null, result);
       }
       else if(result["error"]){
         this.showSnackBar("Sorry, some error occured!");
       }
     });
-
   }
   deleteAction(action)
   {
@@ -214,7 +224,7 @@ export class DashboardComponent implements OnInit {
       action._id,
       (resp)=>{
         this.showSnackBar("Successfully Deleted Action!");
-        this.retreiveActions();
+        this.updateActions();
         this.current_action = null;
       },
       (err) => {
@@ -241,7 +251,8 @@ addSubAction() {
       else if(result)
       {
         this.showSnackBar("Successfully added Sub-Action!");
-        this.retreiveActions();
+        this.updateSubActions(result._id);
+
       }
       else if(result["error"])
       {
@@ -265,31 +276,31 @@ addSubAction() {
       if(!result) {
         return;
       }
-      else if(result)
-      {
-        this.showSnackBar("Successfully edited Sub-Action!");
-        this.retreiveActions();
-      }
       else if(result["error"])
       {
         this.showSnackBar("Sorry, some error occured!");
       }
+      else if(result)
+      {
+        this.showSnackBar("Successfully edited Sub-Action!");
+        this.updateSubActions(result._id);
+      }
       console.log("Back :)");
     });
-
   }
   deleteSubAction(action)
   {
-      this.apiService.deleteSubAction(
-        action._id,
-        (resp)=>{
-          this.showSnackBar("Successfully Deleted Sub-Action!");
-          //this.retreiveActions();
-          this.current_sub_action = null;
-        },
-        (err) => {
-          console.log(err);
-        });
+    this.apiService.deleteSubAction(
+      action._id,
+      (resp)=> {
+        this.showSnackBar("Successfully Deleted Sub-Action!");
+        this.current_sub_action = null;
+        this.updateSubActions();
+
+      },
+      (err) => {
+        console.log(err);
+      });
   }
 
 
@@ -302,25 +313,28 @@ addTemplate() {
       language: null,
       template: null,
       instructions: null,
+      sub_action_id: this.current_sub_action["_id"],
       action_name: this.current_action["name"],
       sub_action_name: this.current_sub_action["name"]
     }
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log("Back :)");
-    if(!result["cancel"]){
+    //console.log("Back :)");
+    //console.log(result);
+    if(!result){
 
-    }
-    else if(result)
-    {
-      this.showSnackBar("Successfully added Template!");
-      this.retreiveActions();
-     // this.setAction(null, result);
     }
     else if(result["error"])
     {
       this.showSnackBar("Sorry, some error occured!");
+    }
+    else if(result)
+    {
+      this.showSnackBar("Successfully added Template!");
+      this.current_language = result;
+      this.updateLanguages(result._id);
+     // this.setAction(null, result);
     }
   });
 }
@@ -341,20 +355,20 @@ editTemplate(act) {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    if(result["cancel"] == true) return;
-    else if(result)
-    {
-      this.showSnackBar("Successfully edited Template!");
-      this.current_sub_action = result;
-      console.log(result);
-      this.updateLanguages();
-      //this.retreiveActions();
+    if(!result) {
+
     }
-    else
+    else if(result["error"])
     {
       this.showSnackBar("Sorry, some error occured!");
     }
-    console.log("Back :)");
+    else if(result)
+    {
+      this.showSnackBar("Successfully edited Template!");
+      console.log(result);
+      this.current_language = result;
+      this.updateLanguages(result._id);
+    }
   });
 
 }
@@ -365,8 +379,8 @@ deleteTemplate(action)
       action._id,
       (resp)=>{
         this.showSnackBar("Successfully Deleted Sub-Action!");
-        //this.retreiveActions();
-        this.current_sub_action = null;
+        this.current_language = null;
+        this.updateLanguages();
       },
       (err) => {
         console.log(err);
@@ -383,9 +397,6 @@ deleteTemplate(action)
     theme: "vs-dark",
     language: "javascript"
   };
-
-  instructions: string = null;
-  code: string = null;
 
   options = {
     theme: "vs-dark"
