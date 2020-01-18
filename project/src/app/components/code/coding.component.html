@@ -6,18 +6,18 @@
         >&nbsp;&nbsp;&nbsp;There was some error. Sorry :(</span
       >
     </div>
-    
 
-   <p>Select Action:
-<mat-form-field>
-  <mat-label>Favorite food</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{food.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-   </p>
+    <div class="container1">
+        <p>Select Action:
+            <mat-form-field>
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+   </div>
   </mat-card>
   
