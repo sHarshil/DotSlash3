@@ -1,0 +1,98 @@
+<div class="container">
+
+    <mat-card >
+      <mat-card class="z-depth-1-half" >
+        <section id="heading" class="mat-typography" [ngStyle.lt-md]="{'margin-top': '30px', 'margin-bottom': '30px'}">
+          <div class="container">
+            <div class="heading-section" fxLayout="column" fxLayoutAlign="center center">
+                <h1 [ngStyle.xs]="{'font-size': '32px'}" [ngStyle.sm]="{'font-size': '42px'}">Welcome to CodeSnippet!</h1>
+              <div >
+                <h2 [ngStyle.xs]="{'font-size': '18px'}" [ngStyle.sm]="{'font-size': '22px'}">
+                  Our aim is to make the process of coding easier for all coders!</h2>
+              </div>
+              <div fxLayout="row">
+                <a class="heading-button-left" (click)="startPrinting()" mat-flat-button color="primary">Start Coding easily!!</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </mat-card>
+      <mat-card class="z-depth-1-half" >
+        <section id="about" class="mat-typography" [ngStyle.lt-md]="{'margin-top': '50px', 'margin-bottom': '50px'}">
+          <div class="container">
+        
+            <div class="about-section about-heading" fxLayout="column" fxLayoutAlign="center center">
+              <div>
+                <h2 [ngStyle.lt-md]="{'margin-bottom': '15px'}" style="font-weight: bold">
+                  Simple Steps to get started!
+                </h2>
+              </div>
+              <div>
+                <h3 [ngStyle.xs]="{'font-size': '18px'}" [ngStyle.sm]="{'font-size': '22px'}">
+                  
+                    </h3>
+              </div>
+            </div>
+        
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
+              <div fxFlex="25">
+                <div fxLayout="column" fxLayoutAlign="center center" [ngStyle.xs]="{'padding': '0 60px'}">
+                  <div>
+                    <i [ngStyle.lt-md]="{'font-size': '48px'}" class="material-icons">person_add</i>
+                  </div>
+                  <span fxFlex="30px"></span>
+                  <h2 class="about-text">Sign Up</h2>
+                  <span fxFlex="10px"></span>
+                  <p class="about-text">Sign Up and verify your email</p>
+                </div>
+              </div>
+        
+              <div fxFlex="25">
+                <div fxLayout="column" fxLayoutAlign="center center" [ngStyle.lt-md]="{'padding': '0 60px'}">
+                  <div>
+                    <i [ngStyle.lt-md]="{'font-size': '48px'}" class="material-icons" color="primary" >mouse</i>
+                  </div>
+                  <span fxFlex="30px"></span>
+                  <h2 class="about-text">Select Action & Sub-Action</h2>
+                  <span fxFlex="10px"></span>
+                  <p class="about-text">Select the action you would like to perform</p>
+                </div>
+              </div>
+        
+              <div fxFlex="25">
+                <div fxLayout="column" fxLayoutAlign="center center" [ngStyle.xs]="{'padding': '0 60px'}">
+                  <div>
+                    <i [ngStyle.lt-md]="{'font-size': '48px'}" class="material-icons">extension</i>
+                  </div>
+                  <span fxFlex="30px"></span>
+                  <h2 class="about-text">Select the language</h2>
+                  <span fxFlex="10px"></span>
+        
+                  <p class="about-text">You can select from common languages like Python, C, C++, Ruby, etc. in which you want that snippet</p>
+                </div>
+              </div>
+        
+              <div fxFlex="25">
+                <div fxLayout="column" fxLayoutAlign="center center" [ngStyle.xs]="{'padding': '0 60px'}">
+                  <div>
+                    <i [ngStyle.lt-md]="{'font-size': '48px'}" class="material-icons">done_all</i>
+                  </div>
+                  <span fxFlex="30px"></span>
+                  <h2 class="about-text">Copy the Snippet and run it!</h2>
+                  <span fxFlex="10px"></span>
+        
+                  <p class="about-text">The code is free to use. The code is written by the CodeSnippet or is taken directly from documentation, so feel free to use it</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+      </mat-card>
+    </mat-card>
+  
+  
+  
+  </div>
+  
+  
