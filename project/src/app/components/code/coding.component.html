@@ -7,16 +7,23 @@
       >
     </div>
 
-    <div class="container1">
+    <div *ngIf="!isLoading" class="container1">
         <p>Select Action:
             <mat-form-field>
-                <mat-label>Favorite food</mat-label>
+                <mat-label>Select</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+                    <mat-option
+                    (onSelectionChange)="setAction($event, action)"
+                     *ngFor="let action of actions" 
+                    [value]="action.name"
+                    >
+                    {{ action.name }}
                     </mat-option>
-                </mat-select>
+                </mat-select
+                >
             </mat-form-field>
+
+            {{ selectedAction }}
         </p>
    </div>
   </mat-card>

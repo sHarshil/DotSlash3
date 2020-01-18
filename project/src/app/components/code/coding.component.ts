@@ -23,6 +23,7 @@ export class CodingComponent implements OnInit
 {
     public isLoading: Boolean = true;
     public actions: {};
+    public current_action: {} = null;
 
     constructor(private httpClient: HttpClient, 
         private router: Router, 
@@ -30,6 +31,24 @@ export class CodingComponent implements OnInit
         public applicationStateService: ApplicationStateService,
         public apiService: APIService) {   }
 
+    setAction(event, action: {})
+    {
+        if (event.isUserInput)
+        {
+            console.log(event);
+            this.current_action = action;
+            this.updateSubActions();
+        }
+    }
+
+    updateSubActions() {
+        console.log("Updating");
+        console.log(this.current_action);
+    }
+    
+    onActionSelect(e) {
+        console.log(e);
+    }
     ngOnInit() 
     {
         this.apiService.getActions(
@@ -45,11 +64,4 @@ export class CodingComponent implements OnInit
         }
         );
     }
-
-    foods: Food[] = [
-        {value: 'steak-0', viewValue: 'Steak'},
-        {value: 'pizza-1', viewValue: 'Pizza'},
-        {value: 'tacos-2', viewValue: 'Tacos'}
-    ];
-
 }

@@ -9,13 +9,23 @@ constants = require("./backend/constants");
 var app = express();
 app.use(bodyParser.json());
 
+var whitelist = 
+['http://localhost:4200', 
+'http://localhost:8080', 
+'http://127.0.0.1:4200', 
+'http://127.0.0.1:8080'];
 
 var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
   }
-  
-  app.options('*', cors(corsOptions)) // include before other routes
+}
+
+app.use(cors(corsOptions)) // include before other routes
 
 // Create link to Angular build directory
 var distDir = __dirname + "/dist/";
