@@ -16,7 +16,7 @@ export class APIService {
     {
       
     }   
-    getActions(success, failure): void 
+    public getActions(success, failure): void 
     {
         this.httpClient
           .get(environment.backend_url + "/actions", {

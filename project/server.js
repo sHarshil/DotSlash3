@@ -2,11 +2,20 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
+var cors = require('cors');
 
 constants = require("./backend/constants");
 
 var app = express();
 app.use(bodyParser.json());
+
+
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+  
+  app.options('*', cors(corsOptions)) // include before other routes
 
 // Create link to Angular build directory
 var distDir = __dirname + "/dist/";
