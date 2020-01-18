@@ -11,9 +11,9 @@ import { templateDialogData } from './templateDialogData';
 export class TemplateModalDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<TemplateModalDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: templateDialogData, 
+    @Inject(MAT_DIALOG_DATA) public data: templateDialogData,
     public apiService: APIService,
-    ) 
+    )
     {
 
     }
@@ -26,7 +26,7 @@ export class TemplateModalDialog implements OnInit {
     this.apiService.makeTemplate(
       this.data.sub_action_id,
       this.data.language,
-      this.data.template, 
+      this.data.template,
     (resp) => {
         this.dialogRef.close(resp);
     },
@@ -39,9 +39,9 @@ export class TemplateModalDialog implements OnInit {
 
   editTemplate(): void {
     this.apiService.editTemplate(
-        this.data._id, 
+        this.data._id,
         this.data.language,
-        this.data.template, 
+        this.data.template,
       (resp) => {
         this.dialogRef.close(resp);
     },

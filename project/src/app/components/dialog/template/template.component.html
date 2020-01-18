@@ -1,13 +1,13 @@
-<h1 mat-dialog-title *ngIf="!data.edit">Add Sub-Action</h1>
-<h1 mat-dialog-title *ngIf="data.edit">Edit Sub-Action</h1>
+<h1 mat-dialog-title *ngIf="!data.edit">Add Template</h1>
+<h1 mat-dialog-title *ngIf="data.edit">Edit Template</h1>
 <div mat-dialog-content>
-  <mat-form-field>  
+  <mat-form-field>
     <mat-label>Enter Action name</mat-label>
     <input matInput [(ngModel)]="data.name">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="addSubAction()" *ngIf="!data.edit">Add</button>
-  <button mat-button cdkFocusInitial (click)="editSubAction()" *ngIf="data.edit">Edit</button>
+  <button mat-button cdkFocusInitial (click)="addTemplate()" *ngIf="!data.edit">Add</button>
+  <button mat-button cdkFocusInitial (click)="editTemplate()" *ngIf="data.edit">Edit</button>
 </div>
