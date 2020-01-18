@@ -1,65 +1,64 @@
 <mat-card appDnd>
-    <mat-card-title>So what mini-task you want to do today?</mat-card-title>
-    <div>
-        <mat-spinner [diameter]="40" *ngIf="false"></mat-spinner>
-        <span *ngIf="isError">&nbsp;&nbsp;&nbsp;There was some error. Sorry :(</span>
-    </div>
+  <mat-card-title>So what mini-task you want to do today?</mat-card-title>
+  <div>
+    <mat-spinner [diameter]="40" *ngIf="false"></mat-spinner>
+    <span *ngIf="isError">&nbsp;&nbsp;&nbsp;There was some error. Sorry :(</span>
+  </div>
 
-    <div [hidden]="false" class="container1">
-        <tr>
-            <td width="200px">
-                <p>Select Action:
-            </td>
-            <td>
-                <mat-form-field>
-                    <mat-label></mat-label>
-                    <mat-select>
-                        <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
-                            [value]="action.name">
-                            {{ action.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr *ngIf="current_action != null">
-            <td>
-                <p>Select Sub-Action:
-            </td>
-            <td>
-                <mat-form-field>
-                    <mat-label></mat-label>
-                    <mat-select>
-                        <mat-option (onSelectionChange)="setSubAction($event, sub_action)"
-                            *ngFor="let sub_action of sub_actions" [value]="sub_action.name">
-                            {{ sub_action.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr *ngIf="current_sub_action != null">
-            <td>
-                <p>Select Language:
-            </td>
-            <td>
-                <mat-form-field>
-                    <mat-label></mat-label>
-                    <mat-select>
-                        <mat-option (onSelectionChange)="setLanguage($event, template)"
-                            *ngFor="let template of languages" [value]="template.language">
-                            {{ template.language }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </tr>
+  <div [hidden]="false" class="container1">
+    <tr>
+      <td width="200px">
+        <p>Select Action:
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select>
+            <mat-option (onSelectionChange)="setAction($event, action)" *ngFor="let action of actions"
+              [value]="action.name">
+              {{ action.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr *ngIf="current_action != null">
+      <td>
+        <p>Select Sub-Action:
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select>
+            <mat-option (onSelectionChange)="setSubAction($event, sub_action)" *ngFor="let sub_action of sub_actions"
+              [value]="sub_action.name">
+              {{ sub_action.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr *ngIf="current_sub_action != null">
+      <td>
+        <p>Select Language:
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-label></mat-label>
+          <mat-select>
+            <mat-option (onSelectionChange)="setLanguage($event, template)" *ngFor="let template of languages"
+              [value]="template.language">
+              {{ template.language }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
 
-   </div>
-   <p *ngIf="code != null">Code:
-        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  </div>
+  <p *ngIf="code != null">Code:
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    <button mat-stroked-button color="primary" (click)="copy()">Copy</button>
+  </p>
 
-        <button (click)="copy()">Copy</button>
-    </p>
-  
 </mat-card>
