@@ -56,11 +56,11 @@ export class DashboardComponent implements OnInit {
 
     this.code = null;
 
-    //if (event.isUserInput) {
+    if (event.isUserInput) {
       console.log(event);
       this.current_action = action;
       this.updateSubActions();
-    //}
+    }
   }
   setSubAction(event, sub_action: {}) {
     this.languages = null;
