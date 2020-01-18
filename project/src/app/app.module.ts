@@ -12,15 +12,13 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClientModule } from "@angular/common/http";
 import { CodingComponent } from "./components/code/coding.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { CodingAreaComponent } from "./components/coding-area/coding-area.component";
 import { MonacoEditorModule } from "ngx-monaco-editor";
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    CodingComponent,
-    CodingAreaComponent
+    CodingComponent
   ],
   imports: [
     BrowserModule,
