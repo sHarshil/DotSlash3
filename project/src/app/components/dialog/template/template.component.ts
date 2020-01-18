@@ -22,7 +22,7 @@ export class TemplateModalDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  addSubAction(): void{
+  addTemplate(): void{
     this.apiService.makeTemplate(
       this.data.sub_action_id,
       this.data.language,
@@ -37,7 +37,7 @@ export class TemplateModalDialog implements OnInit {
     });
   }
 
-  editSubAction(): void {
+  editTemplate(): void {
     this.apiService.editTemplate(
         this.data._id, 
         this.data.language,

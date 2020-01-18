@@ -17,6 +17,7 @@ import { DiffEditorModel } from "ngx-monaco-editor";
 import { ActionModalDialog } from '../dialog/action/action.component';
 import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA, MatSelect } from '@angular/material';
 import { SubActionModalDialog } from '../dialog/subaction/sub-action.component';
+import { TemplateModalDialog } from '../dialog/template/template.component';
 
 @Component({
   selector: "dashboard",
@@ -284,6 +285,79 @@ addSubAction() {
           console.log(err);
         });
   }
+
+
+addTemplate() {
+  const dialogRef = this.dialog.open(TemplateModalDialog, {
+    width: '500px',
+    data: {
+      edit: false,
+      _id: null,
+      language: null,
+      template: null
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log("Back :)");
+    if(result)
+    {
+      this.showSnackBar("Successfully added Template!");
+      this.retreiveActions();
+     // this.setAction(null, result);
+    }
+    else
+    {
+      this.showSnackBar("Sorry, some error occured!");
+    }
+  });
+}
+
+editTemplate(act) {
+
+  const dialogRef = this.dialog.open(TemplateModalDialog, {
+    width: '500px',
+    data: {
+      edit: true,
+      _id: act["_id"],
+      language: act["language"],
+      template: act["template"]
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if(result)
+    {
+      this.showSnackBar("Successfully edited Template!");
+      this.current_sub_action = result;
+      console.log(result);
+
+      this.updateLanguages();
+
+      //this.retreiveActions();
+    }
+    else
+    {
+      this.showSnackBar("Sorry, some error occured!");
+    }
+    console.log("Back :)");
+  });
+
+}
+
+deleteTemplate(action)
+{
+    this.apiService.deleteSubAction(
+      action._id, 
+      (resp)=>{
+        this.showSnackBar("Successfully Deleted Sub-Action!");
+        //this.retreiveActions();
+        this.current_sub_action = null;
+      },
+      (err) => {
+        console.log(err);
+      });
+}
 
   copy() {
     //alert(this.code);
