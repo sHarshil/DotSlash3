@@ -92,9 +92,11 @@ export class APIService {
         );
     }
 
-    public makeSubAction(action_id, success, failure): void 
+    public makeSubAction(action_id, name, success, failure): void 
     {
-        var data = {};
+        var data = {
+            "name": name
+        };
         this.httpClient
           .post(environment.backend_url + "/action/" + action_id, data, {
             responseType: "text",
@@ -155,7 +157,7 @@ export class APIService {
         );
     }
     
-    editAction(_id: string, name: string, success: (resp: any) => void, failure: (err: any) => void) {
+    public editAction(_id: string, name: string, success: (resp: any) => void, failure: (err: any) => void) {
         this.httpClient
         .put(environment.backend_url + "/action/" + _id, {"name" : name} , 
         {
@@ -176,4 +178,44 @@ export class APIService {
 
     }
 
+    public deleteSubAction(_id, success, failure): void 
+    {
+        this.httpClient
+          .delete(environment.backend_url + "/subaction/"+_id, {
+            responseType: "text",
+            headers: { "Content-Type": "application/json; charset=utf-8" }
+          })
+          .subscribe(
+            res => {
+              const response = JSON.parse(res);
+              console.log(response);
+              success(response);
+            },
+            err => {
+              console.log(err);
+              failure(err);
+            }
+        );
+    }
+    
+    editSubAction(_id: string, name: string, success: (resp: any) => void, failure: (err: any) => void) {
+        this.httpClient
+        .put(environment.backend_url + "/subaction/" + _id, {"name" : name} , 
+        {
+          responseType: "text",
+          headers: { "Content-Type": "application/json; charset=utf-8" }
+        })
+        .subscribe(
+          res => {
+            const response = JSON.parse(res);
+            console.log(response);
+            success(response);
+          },
+          err => {
+            console.log(err);
+            failure(err);
+          }
+      );
+
+    }
 }

@@ -16,6 +16,7 @@ import { APIService } from "src/app/services/api.service";
 import { DiffEditorModel } from "ngx-monaco-editor";
 import { ActionModalDialog } from '../dialog/action/action.component';
 import { MatDialog, MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material';
+import { SubActionModalDialog } from '../dialog/subaction/action.component';
 
 export interface Food {
   value: string;
@@ -145,19 +146,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.retreiveActions();
   }
-  deleteAction(action)
-  {
-      this.apiService.deleteAction(
-        action._id, 
-        (resp)=>{
-          this.showSnackBar("Successfully Deleted Action!");
-          this.retreiveActions();
-          this.current_action = null;
-        },
-        (err) => {
-          console.log(err);
-        });
+
+  showSnackBar(msg: String){
+    this._snackBar.openFromComponent(SnackBarTempComponent, {
+      duration: 5 * 1000,
+      data: {msg: msg}
+    });
   }
+
   addAction() {
     const dialogRef = this.dialog.open(ActionModalDialog, {
       width: '500px',
@@ -183,12 +179,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  showSnackBar(msg: String){
-    this._snackBar.openFromComponent(SnackBarTempComponent, {
-      duration: 5 * 1000,
-      data: {msg: msg}
-    });
-  }
   editAction(act) {
 
     const dialogRef = this.dialog.open(ActionModalDialog, {
@@ -214,8 +204,82 @@ export class DashboardComponent implements OnInit {
     });
 
   }
-  deleteActionAction(act) {
+  deleteAction(action)
+  {
+      this.apiService.deleteAction(
+        action._id, 
+        (resp)=>{
+          this.showSnackBar("Successfully Deleted Action!");
+          this.retreiveActions();
+          this.current_action = null;
+        },
+        (err) => {
+          console.log(err);
+        });
+  }
 
+addSubAction() {
+    const dialogRef = this.dialog.open(SubActionModalDialog, {
+      width: '500px',
+      data: {
+        edit: false,
+        _id: null,
+        name: null
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Back :)");
+      if(result)
+      {
+        this.showSnackBar("Successfully added Sub-Action!");
+        this.retreiveActions();
+       // this.setAction(null, result);
+      }
+      else
+      {
+        this.showSnackBar("Sorry, some error occured!");
+      }
+    });
+  }
+
+  editSubAction(act) {
+
+    const dialogRef = this.dialog.open(SubActionModalDialog, {
+      width: '500px',
+      data: {
+        edit: true,
+        _id: act["_id"],
+        name: act["name"]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.showSnackBar("Successfully edited Sub-Action!");
+        this.retreiveActions();
+      }
+      else
+      {
+        this.showSnackBar("Sorry, some error occured!");
+      }
+      console.log("Back :)");
+    });
+
+  }
+  deleteSubAction(action)
+  {
+      this.apiService.deleteSubAction(
+        action._id, 
+        (resp)=>{
+          this.showSnackBar("Successfully Deleted Sub-Action!");
+          this.retreiveActions();
+          this.current_action = null;
+        },
+        (err) => {
+          console.log(err);
+        });
   }
 
   copy() {
